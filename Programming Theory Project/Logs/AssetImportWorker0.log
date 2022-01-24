@@ -1624,3 +1624,11 @@ Received Import Request.
 Start importing Assets/Scripts/MenuHandler.cs using Guid(602d32720005510409bb77d5f184e09a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e84252dfc97db376e695d04012361f3f') in 0.008146 seconds 
   Import took 0.010488 seconds .
 
+========================================================================
+Received Import Request.
+  Time since last request: 119.404760 seconds.
+  path: Assets/Scripts/CamerController.cs
+  artifactKey: Guid(1e3a677228f5ddd43a73958c316fe157) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/CamerController.cs using Guid(1e3a677228f5ddd43a73958c316fe157) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57988128352000cbf6e6375246597dea') in 0.006406 seconds 
+  Import took 0.008968 seconds .
+
