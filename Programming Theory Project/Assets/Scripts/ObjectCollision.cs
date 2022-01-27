@@ -10,6 +10,7 @@ public class ObjectCollision : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        onObjectEncounter();
         Destroy(gameObject);
     }
 }
