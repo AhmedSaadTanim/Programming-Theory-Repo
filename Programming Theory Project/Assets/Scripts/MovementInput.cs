@@ -21,7 +21,7 @@ public class MovementInput : MonoBehaviour {
 	public float allowPlayerRotation = 0.1f;
 	public Camera cam;
 	public CharacterController controller;
-	public bool isGrounded;
+	public bool isGrounded,isGameStart;
 	public float clampXPos, clampXNeg;
     [Header("Animation Smoothing")]
     [Range(0, 1f)]
@@ -46,6 +46,8 @@ public class MovementInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		isGameStart = GameObject.Find("Main Camera").GetComponent<CameraController>().gameStart;
+		
 		InputMagnitude ();
 
         isGrounded = controller.isGrounded;
@@ -60,13 +62,12 @@ public class MovementInput : MonoBehaviour {
         moveVector = new Vector3(0, verticalVel * .2f * Time.deltaTime, 0);
         controller.Move(moveVector);
 
-
     }
 
     void PlayerMoveAndRotation() {
 
 		InputX = Input.GetAxis ("Horizontal");
-		//InputZ = Input.GetAxis ("Vertical");
+		InputZ = Input.GetAxis ("Vertical");
 
 		var camera = Camera.main;
 		var forward = cam.transform.forward;
@@ -107,7 +108,7 @@ public class MovementInput : MonoBehaviour {
 	void InputMagnitude() {
 		//Calculate Input Vectors
 		InputX = Input.GetAxis ("Horizontal");
-		//InputZ = Input.GetAxis ("Vertical");
+		InputZ = Input.GetAxis ("Vertical");
 
 		//anim.SetFloat ("InputZ", InputZ, VerticalAnimTime, Time.deltaTime * 2f);
 		//anim.SetFloat ("InputX", InputX, HorizontalAnimSmoothTime, Time.deltaTime * 2f);
@@ -117,7 +118,7 @@ public class MovementInput : MonoBehaviour {
 
         //Physically move player
 
-		if (Speed > allowPlayerRotation) {
+		if (Speed > allowPlayerRotation && isGameStart) {
 			anim.SetFloat ("Blend", Speed, StartAnimTime, Time.deltaTime);
 			PlayerMoveAndRotation ();
 		} else if (Speed < allowPlayerRotation) {

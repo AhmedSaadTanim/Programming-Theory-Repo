@@ -13,38 +13,56 @@ public class CharacterSkinController : MonoBehaviour
     public enum EyePosition { normal, happy, angry, dead}
     public EyePosition eyeState;
 
+    private bool isGameStart,changeDefaultAnim;
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
         characterMaterials = GetComponentsInChildren<Renderer>();
         
+        ChangeMaterialSettings(3);
+        ChangeEyeOffset(EyePosition.dead);
+    }
+
+    void changeAnimation()
+    {
+        isGameStart = GameObject.Find("Main Camera").GetComponent<CameraController>().gameStart;
+        if (isGameStart && !changeDefaultAnim)
+        {
+            ChangeMaterialSettings(0);
+            ChangeEyeOffset(EyePosition.normal);
+            ChangeAnimatorIdle("normal");
+            changeDefaultAnim = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //ABSTRACTION
+        changeAnimation();
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            //ChangeMaterialSettings(0);
+            ChangeMaterialSettings(0);
             ChangeEyeOffset(EyePosition.normal);
             ChangeAnimatorIdle("normal");
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            //ChangeMaterialSettings(1);
+            ChangeMaterialSettings(1);
             ChangeEyeOffset(EyePosition.angry);
             ChangeAnimatorIdle("angry");
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            //ChangeMaterialSettings(2);
+            ChangeMaterialSettings(2);
             ChangeEyeOffset(EyePosition.happy);
             ChangeAnimatorIdle("happy");
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            //ChangeMaterialSettings(3);
+            ChangeMaterialSettings(3);
             ChangeEyeOffset(EyePosition.dead);
             ChangeAnimatorIdle("dead");
         }
